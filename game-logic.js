@@ -17,68 +17,48 @@ let playerTwoMoveTreeType;
 let playerTwoMoveTreeValue;
 
 
-//function that sets players moves
+//function that sets players moves - unifinshed
 
 const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType, moveTwoValue, moveThreeType, moveThreeValue) => {
   const playerOne = 'Player One';
   const playerTwo = 'Player Two';
 
-  
-
-  //player One move type input function
-  const getPlayerOneType = (playerOneMoveOneType, playerOneMoveTwoType, playerOneMoveTreeType ) => {
-
-    playerOneMoveOneType = playerOneMoveOneType.toLowerCase();
-    if (playerOneMoveOneType === 'rock' || playerOneMoveOneType === 'paper' || playerOneMoveOneType === 'scissors'){
-      return playerOneMoveOneType;
+  function getPlayerMove(player, round) {
+    const move = {};
+    if (player === 'Player One') {
+      switch (round) {
+        case 1:
+          move.type = playerOneMoveOneType;
+          move.value = playerOneMoveOneValue;
+          break;
+        case 2:
+          move.type = playerOneMoveTwoType;
+          move.value = playerOneMoveTwoValue;
+          break;
+        case 3:
+          move.type = playerOneMoveThreeType;
+          move.value = playerOneMoveThreeValue;
+          break;
+      }
     } else {
-      console.log('Error! Please enter valid entry.')
+      switch (round) {
+        case 1:
+          move.type = playerTwoMoveOneType;
+          move.value = playerTwoMoveOneValue;
+          break;
+        case 2:
+          move.type = playerTwoMoveTwoType;
+          move.value = playerTwoMoveTwoValue;
+          break;
+        case 3:
+          move.type = playerTwoMoveThreeType;
+          move.value = playerTwoMoveThreeValue;
+          break;
+      }
     }
-
-    playerOneMoveTwoType = playerOneMoveTwoType.toLowerCase();
-    if (playerOneMoveTwoType === 'rock' || playerOneMoveTwoType === 'paper' || playerOneMoveTwoType === 'scissors'){
-      return playerOneMoveTwoType;
-    } else {
-      console.log('Error! Please enter valid entry.')
-    }
-
-    playerOneMoveTreeType = playerOneMoveTreeType.toLowerCase();
-    if (playerOneMoveTreeType === 'rock' || playerOneMoveTreeType === 'paper' || playerOneMoveTreeType === 'scissors'){
-      return playerOneMoveTreeType;
-    } else {
-      console.log('Error! Please enter valid entry.')
-    }
-//   test console log - not sure if valid
-//console.log(getPlayerOneType('rock', 'paper', 'scissors'));
+    return move;
   }
-
-
-  //function for Player two  move type choices
-  const getPlayerTwoChoices = (playerTwoMoveOneType, playerTwoMoveTwoType, playerTwoMoveTreeType ) => {
-
-    playerTwoMoveOneType = playerTwoMoveOneType.toLowerCase();
-    if (playerTwoMoveOneType === 'rock' || playerTwoMoveOneType === 'paper' || playerTwoMoveOneType === 'scissors'){
-      return playerTwoMoveOneType;
-    } else {
-      console.log('Error! Please enter valid entry.')
-    }
-
-    playerTwoMoveTwoType = playerTwoMoveTwoType.toLowerCase();
-    if (playerTwoMoveTwoType === 'rock' || playerTwoMoveTwoType === 'paper' || playerTwoMoveTwoType === 'scissors'){
-      return playerTwoMoveTwoType;
-    } else {
-      console.log('Error! Please enter valid entry.')
-    }
-
-    playerTwoMoveTreeType = playerTwoMoveTreeType.toLowerCase();
-    if (playerTwoMoveTreeType === 'rock' || playerTwoMoveTreeType === 'paper' || playerTwoMoveTreeType === 'scissors'){
-      return playerTwoMoveTreeType;
-    } else {
-      console.log('Error! Please enter valid entry.')
-    }
-    //   test console log - not sure if valid
-    //console.log(getPlayerTwoChoices('rock', 'paper', 'scissors'));
-  };
+}
 
 
 
