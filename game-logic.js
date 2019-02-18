@@ -1,194 +1,201 @@
-//code for Rock-Paper-Scisors X99
-//by Andre Dupont - andre.dupont@gmail.com
+
 
 //12 global Variables
 let playerOneMoveOneType;
 let playerOneMoveOneValue;
 let playerOneMoveTwoType;
 let playerOneMoveTwoValue;
-let playerOneMoveTreeType;
-let playerOneMoveTreeValue;
+let playerOneMoveThreeType;
+let playerOneMoveThreeValue;
 
 let playerTwoMoveOneType;
 let playerTwoMoveOneValue;
 let playerTwoMoveTwoType;
 let playerTwoMoveTwoValue;
-let playerTwoMoveTreeType;
-let playerTwoMoveTreeValue;
+let playerTwoMoveThreeType;
+let playerTwoMoveThreeValue;
+
+const P1 = 'Player One';
+const P2 = 'Player Two';
+const TIE = 'Tie';
+const ROCK = 'rock';
+const PAPER = 'paper';
+const SCISSORS = 'scissors';
 
 
-//function that sets players moves - unifinshed
+//function that sets players moves
 
-const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType, moveTwoValue, moveThreeType, moveThreeValue) => {
-  const playerOne = 'Player One';
-  const playerTwo = 'Player Two';
-
-  function getPlayerMove(player, round) {
-    const move = {};
-    if (player === 'Player One') {
-      switch (round) {
-        case 1:
-          move.type = playerOneMoveOneType;
-          move.value = playerOneMoveOneValue;
-          break;
-        case 2:
-          move.type = playerOneMoveTwoType;
-          move.value = playerOneMoveTwoValue;
-          break;
-        case 3:
-          move.type = playerOneMoveThreeType;
-          move.value = playerOneMoveThreeValue;
-          break;
-      }
-    } else {
-      switch (round) {
-        case 1:
-          move.type = playerTwoMoveOneType;
-          move.value = playerTwoMoveOneValue;
-          break;
-        case 2:
-          move.type = playerTwoMoveTwoType;
-          move.value = playerTwoMoveTwoValue;
-          break;
-        case 3:
-          move.type = playerTwoMoveThreeType;
-          move.value = playerTwoMoveThreeValue;
-          break;
-      }
+const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType,
+  moveTwoValue, moveThreeType, moveThreeValue) => {
+  if (!moveOneType || !moveOneValue || !moveTwoType ||
+    !moveTwoValue || !moveThreeType || !moveThreeValue){
+      return;
     }
-    return move;
+  if (!validTypes(oveOneType, moveTwoType, moveThreeType)){
+    return;
   }
-}
-
-
-
-
-//function to deternime round winner
-
-//Compare playerOneMoveOneType with playerTwoMoveOneType for round one winner
-/*if player 1 wins, count is up by 1, if player 2 wins count down by 1 */
-const determineRounOnedWinner = (playerOneMoveOneType, playerTwoMoveOneType) =>{
-
-  if (playerOneMoveOneType === 'rock'){
-    if (playerTwoMoveOneType === 'paper'){
-      return -1;
-    }else {
-      return 1';
-    }
+  if (!validValues(moveOneValue, moveTwoValue, moveThreeValue))
   }
-  	if (playerOneMoveOneType === 'paper'){
-    if (playerTwoMoveOneType === 'scissors'){
-      return -1;
-    }else {
-      return 1;
-    }
-  }
- 	 	if (playerOneMoveOneType === 'scissors'){
-    if (playerTwoMoveOneType === 'rock'){
-      return -1;
-    }else {
-      return 1;
-		}
-  }
-  if (playerOneMoveOneType === playerTwoMoveOneType){
-    if (playerOneMoveOneValue > playerTwoMoveOneValue){
-      return 1
-    }else if(playerOneMoveOneValue < playerTwoMoveOneValue){
-      return -1
-    }
-    else {
-      return 0;
-  }
-}
 
-//Compare playerOneMoveTwoType with playerTwoMoveTwoType for round two winner
-const determineRounTwodWinner = (playerOneMoveTwoType, playerTwoMoveTwoType) =>{
+  switch (player) {
+    case P1:
+      playerOneMoveOneType = moveOneType;
+      playerOneMoveOneValue = moveOneValue;
+      playerOneMoveTwoType = moveTwoType;
+      playerOneMoveTwoValue = moveTwoValue;
+      playerOneMoveThreeType = moveThreeType;
+      playerOneMoveThreeValue = moveThreeValue;
+      break;
 
-  if (playerOneMoveTwoType === 'rock'){
-    if (playerTwoMoveTwoType === 'paper'){
-      return -1;
-    }else {
-      return 1';
-    }
-  }
-  	if (playerOneMoveTwoType === 'paper'){
-    if (playerTwoMoveTwoType === 'scissors'){
-      return -1;
-    }else {
-      return 1;
-    }
-  }
- 	 	if (playerOneMoveTwoType === 'scissors'){
-    if (playerTwoMoveTwoType === 'rock'){
-      return -1;
-    }else {
-      return 1;
-		}
-  }
-  if (playerOneMoveTwoType === playerTwoMoveTwoType){
-    if (playerOneMoveOneValue > playerTwoMoveOneValue){
-      return 1
-    }else if(playerOneMoveOneValue < playerTwoMoveOneValue){
-      return -1
-    }
-    else {
-      return 0;
+    case P2:
+      playerTwoMoveOneType = moveOneType;
+      playerTwoMoveOneValue = moveOneValue;
+      playerTwoMoveTwoType = moveTwoType;
+      playerTwoMoveTwoValue = moveTwoValue;
+      playerTwoMoveThreeType = moveThreeType;
+      playerTwoMoveThreeValue = moveThreeValue;
+      break;
   }
 };
 
-//Compare playerOneMoveTreeType with playerTwoMoveTreeType for round tree winner
-const determineRountreedWinner = (playerOneMoveTreeType, playerTwoMoveTreeType) =>{
+const validTypes = (t1, t2, t3) =>
+  validType(t1) && validType (t2) validType (t3);
 
-  if (playerOneMoveTreeType === 'rock'){
-    if (playerTwoMoveTreeType === 'paper'){
-      return -1;
-    }else {
-      return 1';
-    }
+//predicate function. Returns to true if type = rock, paper or scissors
+const validType = (type) => type === ROCK || type === PAPER || type === SCISSORS;
+
+//predicate that return true if the values are good(more than 1 and max 99 total)
+const validValues = (v1, v2, v3) =>
+v1 >= 1 && v2 >=1 && v2 >=1 && v1 + v2 + v3 <= 99;
+
+
+//Function that evaluates round winner
+const getRoundWinner = round =>{
+  let p1t;
+  let p1v;
+  let p2t;
+  let p2v;
+
+switch (round) {
+  case 1:
+    p1t = playerOneMoveOneType;
+    p1v = playerOneMoveOneValue;
+    p2t = playerTwoMoveOneType;
+    p2v = playerTwoMoveOneValue;
+    break;
+
+  case 2:
+    p1t = playerOneMoveTwoType;
+    p1v = playerOneMoveTwoValue;
+    p2t = playerTwoMoveTwoType;
+    p2v = playerTwoMoveTwoValue;
+    break;
+
+  case 3:
+    p1t = playerOneMoveThreeType;
+    p1v = playerOneMoveThreeValue;
+    p2t = playerTwoMoveThreeType;
+    p2v = playerTwoMoveThreeValue;
+    break;
+
+  default:
+    return null;
   }
-  	if (playerOneMoveTreeType === 'paper'){
-    if (playerTwoMoveTreeType === 'scissors'){
-      return -1;
-    }else {
-      return 1;
-    }
+  return evaluateMove(p1t, p1v, p2t, p2v)
+};
+
+const evaluateMove = (p1t, p1v, p2t, p2v) => {
+  //ensure that all moves are present
+
+  if (!p1t || !p1v || !p2t || !p2v) {
+    return null;
   }
- 	 	if (playerOneMoveTreeType === 'scissors'){
-    if (playerTwoMoveTreeType === 'rock'){
-      return -1;
-    }else {
-      return 1;
-		}
-  }
-  if (playerOneMoveTreeType === playerTwoMoveTreeType){
-    if (playerOneMoveOneValue > playerTwoMoveOneValue){
-      return 1
-    }else if(playerOneMoveOneValue < playerTwoMoveOneValue){
-      return -1
+
+  //if types are the same, winner is based on higher value
+  if (p1t === p2t){
+    if ( p1v === p2v){
+      return TIE;
     }
-    else {
-      return 0;
+
+    return p1v > p2v ? P1 : P2;
+  }
+
+  //types different, usual RPS ruLEs apply
+switch (p1t) {
+  case ROCK:
+    return p2t === SCISSORS ? P1 : P2;
+
+  case PAPER:
+    return p2t === ROCK ? P1 : P2;
+
+  case SCISSORS:
+    return p2t === PAPER ? P1 : P2;
   }
 };
 
-//function to determine game winner - min 2/3
-//verify how to make sum, or how to determine the Game winner otherwise this is not final
-const determineGameWinner = (determineRounOnedWinner, determineRounTwodWinner, determineRountreedWinner) =>{
-  if ((determineRounOnedWinner + determineRounTwodWinner + determineRountreedWinner) > 0){
-    return 'Player One Wins'
-  }
-  else if ((determineRounOnedWinner + determineRounTwodWinner + determineRountreedWinner) < 0){
-    return 'Player two Wins'
-  }
-  else ((determineRounOnedWinner + determineRounTwodWinner + determineRountreedWinner) = 0){
-    return 'Game is a tie'
-  }
-}
+let p1wins;
+let p2wins;
 
+const allGlobalsDefined = () =>
+  playerTwoMoveOneType &&
+  playerOneMoveOneValue &&
+  playerOneMoveTwoType &&
+  playerOneMoveTwoValue &&
+  playerOneMoveThreeType &&
+  playerOneMoveThreeValue &&
+  playerTwoMoveOneType &&
+  playerTwoMoveOneValue &&
+  playerTwoMoveTwoType &&
+  playerTwoMoveTwoValue &&
+  playerTwoMoveThreeType &&
+  playerTwoMoveThreeValue &&
 
-//function to set ramdom moves for cumputer
-// got 3 randomized choices. How do I tie it in with the rest? should I change my const name to the variable playerTwoMoveOneType, M2, M3?
-//I have to add the Strenght - 1-97 for each, maximum of 99 total.
+//function that determines Game winner
+const getGameWinner = () => {
+  if(!allGlobalsDefined()) {
+    return null;
+  }
+
+  let r1winner = getRoundWinner(1);
+  let r2winner = getRoundWinner(2);
+  let r3winner = getRoundWinner(3);
+
+  p1wins = 0;
+  p2wins = 0;
+  incrementScores(r1winner);
+  incrementScores(r2winner);
+  incrementScores(r3winner);
+
+  if (p1wins === p2wins){
+    return TIE;
+  }
+  return  p1Wins > p2Wins ? P1 : P2;
+};
+
+const incrementScores = (winner) => {
+  switch (winner) {
+    case P1:
+      p1wins +=1;
+      break;
+
+    case P2:
+      p2wins +=1;
+      break;
+  }
+};
+
+//function to set ramdom moves for cumputer (different from correction)
+const setComputerMoves = () => {
+  setPlayer2MoveTypes();
+  setPlayer2MoveValues();
+};
+
+const setPlayer2MoveTypes = ()=> {
+  playerTwoMoveOneType = getComputerType1();
+  playerTwoMoveTwoType = getComputerType2();
+  playerTwoMovethreeType = getComputerType3();
+};
+
 const getComputerType1 = () => {
   const randomNumber = Math.floor(Math.random() * 3);
   switch (randomNumber){
@@ -231,5 +238,19 @@ const getComputerType3 = () => {
     case 2:
       return 'scissors';
       break;
-  }
+    }
+};
+
+//generates random number 1-97 minimum 1, maximum 97, totalling 99 for the 3
+const getComputerValues = () => {
+  let playerTwoMoveOneValue = Math.floor(Math.random() * 98);
+  let playerTwoMoveTwoValue = Math.floor(Math.random() * 98) - cpuValue1;
+  let playerTwoMovethreeValue = 99 - (cpuValue1 + cpuValue2);
+}
+/*
+console.log(`
+  p2v1 = ${playerTwoMoveOneValue}
+  p2v2 = ${playerTwoMoveTwoValue}
+  p2v3 = ${playerTwoMoveThreeValue}`);
+  */
 };
